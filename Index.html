@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Large HTML Page</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div id="imageContainer"></div>
+
+<script>
+$(document).ready(function(){
+    // Path to the folder containing images
+    var imageFolder = "test photo";
+
+    // Function to load images from folder
+    function loadImages() {
+        $.ajax({
+            url: imageFolder,
+            success: function (data) {
+                $(data).find("a:contains(.jpg), a:contains(.jpeg), a:contains(.png), a:contains(.gif)").each(function () {
+                    var imageNameWithDateTime = $(this).text(); // Get the image name with date and time
+                    var imageName = imageNameWithDateTime.split(".jpg")[0];
+                    var imageUrl = imageFolder + "/" + imageName+".jpg";
+                    var img = $("<img>").attr("src", imageUrl).attr("alt", imageName);
+                    $("#imageContainer").append(img);
+                });
+            }
+        });
+    }
+
+    // Call the function to load images
+    loadImages();
+});
+</script>
+</body>
+</html>
