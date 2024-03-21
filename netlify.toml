@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/test%20photo/*"
+  to = "/test%20photo/:splat"
+  status = 200
